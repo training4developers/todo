@@ -26,13 +26,13 @@
 					.catch(handleError);
 			},
 
-			delete: function(todo) {
-				return $http.delete("/api/todos/" + encodeURIComponent(todo.id))
+			delete: function(id) {
+				return $http.delete("/api/todos/" + encodeURIComponent(id))
 					.catch(handleError);
 			},
 
-			get: function(todo) {
-				return $http.get("/api/todos/" + encodeURIComponent(todo.id))
+			get: function(id) {
+				return $http.get("/api/todos/" + encodeURIComponent(id))
 					.catch(handleError);
 			}
 

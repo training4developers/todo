@@ -8,14 +8,22 @@
 			ToDoApi.update(todo);
 		};
 
-		ToDoApi.getAll().then(function(result) {
-			$scope.todos = result.data;
+		Events.on("refresh-todo", function() {
+			ToDoApi.getAll().then(function(result) {
+				$scope.todos = result.data;
+			});
 		});
 
 		Events.on("find-todos", function(findToDos) {
 			$scope.findToDos = findToDos;
 		});
 
+
+		$scope.refreshToDo = function() {
+			Events.trigger("refresh-todo");
+		}
+
+		$scope.refreshToDo();
 	}
 
 	angular.module("ToDo.Controllers")

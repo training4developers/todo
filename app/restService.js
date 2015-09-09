@@ -55,7 +55,7 @@ module.exports = function(options) {
 
       var
         todo = req.body,
-        stmt = db.prepare("insert into todos (todo, priority, due_date, completed) values (?, ?, ?, ?, ?)");
+        stmt = db.prepare("insert into todos (todo, priority, due_date, completed) values (?, ?, ?, ?)");
 
       stmt.run(todo.todo, todo.priority, todo.due_date, todo.completed, function(err) {
         if (err) {
