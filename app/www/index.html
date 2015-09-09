@@ -11,17 +11,17 @@
 		<script src="libs/foundation/js/vendor/modernizr.js"></script>
 	</head>
 	<body>
-		<header>
+		<header ng-controller="HeaderCtrl">
 			<nav class="top-bar" data-topbar role="navigation">
 			  <ul class="title-area">
 			    <li class="name">
-			      <h1><a href="#">ToDos</a></h1>
+			      <h1><a href="#">{{siteName}}</a></h1>
 			    </li>
 			  </ul>
 			  <section class="top-bar-section">
 			    <ul class="right">
 						<li class="has-form">
-				      <input type="text" placeholder="Find ToDos" arial-label="Find To Dos">
+				      <input type="text" placeholder="Find ToDos" aria-label="Find To Dos" ng-model="findToDos" elc-trigger-event="find-todos">
 						</li>
 			      <li class="has-form">
 							<a href="#" class="button expand" data-reveal-id="todoDetails">New ToDo</a>
@@ -30,7 +30,7 @@
 			  </section>
 			</nav>
 		</header>
-		<main>
+		<main ng-controller="MainCtrl">
 			<div id="todo-list">
 				<div class="row">
 				  <div class="small-12 medium-6 columns">To Dos</div>
@@ -38,33 +38,25 @@
 				  <div class="medium-2 columns show-for-medium-up">Due Date</div>
 				  <div class="medium-2 columns show-for-medium-up">Completed</div>
 				</div>
-				<div class="row">
-				  <div class="small-10 medium-6 columns"><a href='#' data-reveal-id="todoDetails">Work on ToDo Application</a></div>
-				  <div class="medium-2 columns show-for-medium-up">Normal</div>
-				  <div class="medium-2 columns show-for-medium-up">9/11/2015</div>
-				  <div class="small-2 medium-2 columns"><input type="checkbox"></div>
+				<div class="row" ng-repeat-start="todo in todos | filter:{todo:findToDos}">
+				  <div class="small-10 medium-6 columns">
+						<a href='#' data-reveal-id="todoDetails">{{todo.todo}}</a>
+					</div>
+				  <div class="medium-2 columns show-for-medium-up">{{todo.priority | priorityLabel}}</div>
+				  <div class="medium-2 columns show-for-medium-up">{{todo.due_date | date:'MM/dd/yyyy'}}</div>
+				  <div class="small-2 medium-2 columns"><input type="checkbox" ng-model="todo.completed" ng-change='saveToDo(todo)'></div>
 				</div>
 				<div class="row show-for-small-only">
-				  <div class="small-6 columns"><small>Priority: Normal</small></div>
-				  <div class="small-6 columns"><small>Due Date: 9/11/2015</small></div>
+				  <div class="small-6 columns"><small>Priority: {{todo.priority | priorityLabel}}</small></div>
+				  <div class="small-6 columns"><small>Due Date: {{todo.due_date | date:'MM/dd/yyyy'}}</small></div>
 				</div>
-				<div class="row">
+				<div class="row" ng-repeat-end>
 					<div class="small-12"><hr></div>
-				</div>
-				<div class="row">
-				  <div class="small-10 medium-6 columns"><a href='#' data-reveal-id="todoDetails">Reply to Client</a></div>
-				  <div class="medium-2 columns show-for-medium-up">High</div>
-				  <div class="medium-2 columns show-for-medium-up">9/8/2015</div>
-				  <div class="small-2 medium-2 columns"><input type="checkbox" checked></div>
-				</div>
-				<div class="row show-for-small-only">
-				  <div class="small-6 columns"><small>Priority: High</small></div>
-				  <div class="small-6 columns"><small>Due Date: 9/8/2015</small></div>
 				</div>
 			</div>
 		</main>
-		<footer>
-			<small>&copy; 2015 Training 4 Developers, Inc.</small>
+		<footer ng-controller="FooterCtrl">
+			<small ng-bind-html="copyrightNotice"></small>
 		</footer>
 
 		<div id="todoDetails" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
@@ -112,19 +104,17 @@
 
 	  <script src="libs/foundation/js/vendor/jquery.js"></script>
 	  <script src="libs/foundation/js/foundation.min.js"></script>
-	  <script>
-
-			$(function() {
-
-		    $(document).foundation();
-
-				var todoDetailsModal = $("#todoDetails");
-
-				todoDetailsModal.on("click", "button", function() {
-					todoDetailsModal.foundation('reveal', 'close');
-				});
-
-			});
-	  </script>
+		<script src="libs/angular/angular.js"></script>
+		<script src="libs/angular-sanitize/angular-sanitize.js"></script>
+	  <script src="js/app.init.js"></script>
+	  <script src="js/app.constants.js"></script>
+	  <script src="js/services/app.events.svc.js"></script>
+	  <script src="js/services/app.todos.svc.js"></script>
+	  <script src="js/filters/app.priority.flt.js"></script>
+	  <script src="js/controllers/app.header.ctrl.js"></script>
+	  <script src="js/controllers/app.main.ctrl.js"></script>
+	  <script src="js/controllers/app.footer.ctrl.js"></script>
+	  <script src="js/directives/app.trigger-event.dir.js"></script>
+	  <script src="js/app.js"></script>
 	</body>
 </html>

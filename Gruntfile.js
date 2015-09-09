@@ -14,10 +14,13 @@ module.exports = function(grunt) {
 
 		var
 			express = require("express"),
+			bodyParser = require("body-parser"),
 			app = express(),
 			webServerConfig = grunt.config("webServer");
 
 		this.async();
+
+		app.use("/api", bodyParser.json());
 
 		app.use("/api", require("./app/restService")(grunt.config("sqlite")));
 

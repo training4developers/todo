@@ -33,6 +33,11 @@ module.exports = function(options) {
     db = new sqlite3.Database(options.fileName);
   }
 
+  function prepareToDo(todo) {
+    todo.completed = todo.completed ? true : false;
+    return todo;
+  };
+
   router.route("/todos")
     .get(function(req, res) {
 
@@ -40,6 +45,7 @@ module.exports = function(options) {
         if (err) {
           res.json(err);
         } else {
+          todos.forEach(prepareToDo);
           res.json(todos);
         }
       });
@@ -70,7 +76,7 @@ module.exports = function(options) {
           if (err) {
             res.json(err);
           } else {
-            res.json(todo);
+            res.json(prepareToDo(todo));
           }
         });
 
