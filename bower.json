@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/training4developers/todo",
+  "authors": [
+    "Eric W. Greene <eric@training4developers.com>"
+  ],
+  "description": "A simple todo application using different JavaScript technologies.",
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/www/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.2",
+    "jquery": "~2.1.4"
+  }
+}

@@ -1,0 +1,23 @@
+body > main {
+	padding-top:20px;
+}
+
+body > footer {
+	text-align:center;
+}
+
+#todo-list > div:first-child {
+	background-color:#dddddd;
+	border-radius: 5px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+#todo-list > div > div:nth-child(n+2) {
+	text-align:center;
+}
+
+input[type='checkbox'] {
+	height:28px;
+	width:28px;
+}
