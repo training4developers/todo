@@ -4,6 +4,9 @@ module.exports = function(grunt) {
 		webServer: {
 			port: 8080,
 			rootFolder: "app/www"
+		},
+		sqlite: {
+			fileName: "todos.db"
 		}
 	});
 
@@ -15,6 +18,8 @@ module.exports = function(grunt) {
 			webServerConfig = grunt.config("webServer");
 
 		this.async();
+
+		app.use("/api", require("./app/restService")(grunt.config("sqlite")));
 
 		app.use(express.static(webServerConfig.rootFolder));
 
