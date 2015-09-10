@@ -11,7 +11,7 @@
 	) {
 
 		function cleanUpModal(rootElement, completedFn) {
-			console.dir(rootElement.foundation('reveal', 'close'));
+			rootElement.foundation('reveal', 'close');
 			rootElement.remove();
 			completedFn();
 		}
@@ -28,12 +28,9 @@
 				scope.modalHeader = scope.todoId ? "Edit ToDo" : "New ToDo";
 
 				scope.saveToDo = function(todo) {
-					if (todo.id) {
-						ToDosRepository.update(todo);
-					} else {
-						ToDosRepository.insert(todo);
-					}
-					cleanUpModal(rootElement, scope.completed);
+					ToDosRepository.save(todo).then(function() {
+						cleanUpModal(rootElement, scope.completed);
+					});
 				};
 
 				scope.cancelToDo = function(todo) {
@@ -42,8 +39,9 @@
 
 				scope.deleteToDo = function(todo) {
 					if (confirm("Are you sure you are a quitter?")) {
-						ToDosRepository.delete(todo.id);
-						cleanUpModal(rootElement, scope.completed);
+						ToDosRepository.delete(todo.id).then(function() {
+							cleanUpModal(rootElement, scope.completed);
+						});
 					}
 				};
 
@@ -68,7 +66,9 @@
 						$templateRequest(TemplateBaseURL + "todo-edit.html")
 					]).then(function(results) {
 
-						scope.todo = results[0].data;
+						console.log(JSON.stringify(results[0]));
+
+						scope.todo = results[0];
 						if (!(scope.todo.dueDate instanceof Date)) {
 							scope.todo.dueDate = new Date(scope.todo.dueDate);
 						}

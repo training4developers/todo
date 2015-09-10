@@ -2,44 +2,32 @@
 
 	factory.$inject = ["$http", "$log", "ToDosRepositoryURL"];
 
+	function handleResponse(results) {
+		return results.data;
+	}
+
 	function factory($http, $log, ToDosRepositoryURL) {
 
-		function handleError(result) {
-			$log.log(JSON.stringify(result));
-			return result;
-		}
-
 		return {
-
 			getAll: function() {
-				return $http.get(ToDosRepositoryURL)
-					.catch(handleError).then(function(results) {
-						return results;
-					});
+				return $http.get(ToDosRepositoryURL).then(handleResponse);
 			},
-
-			update: function(todo) {
-				return $http.put(ToDosRepositoryURL + "/" + encodeURIComponent(todo.id), todo)
-					.catch(handleError);
-			},
-
-			insert: function(todo) {
-				return $http.post(ToDosRepositoryURL, todo)
-					.catch(handleError);
-			},
-
-			delete: function(id) {
-				return $http.delete(ToDosRepositoryURL + "/" + encodeURIComponent(id))
-					.catch(handleError);
-			},
-
 			get: function(id) {
-				return $http.get(ToDosRepositoryURL + "/" + encodeURIComponent(id))
-					.catch(handleError);
+				return $http.get(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);;
+			},
+			insert: function(todo) {
+				return $http.post(ToDosRepositoryURL, todo).then(handleResponse);;
+			},
+			update: function(todo) {
+				return $http.put(ToDosRepositoryURL + "/" + encodeURIComponent(todo.id), todo).then(handleResponse);;
+			},
+			save: function(todo) {
+				return todo.id ? this.update(todo) : this.insert(todo);
+			},
+			delete: function(id) {
+				return $http.delete(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);;
 			}
-
 		};
-
 	}
 
 	angular.module("ToDo.Services")

@@ -4,6 +4,10 @@
 
 	function controller($scope, SiteName, Events) {
 		$scope.siteName = SiteName;
+
+		$scope.refreshToDos = function() {
+			Events.trigger("refresh-todos");
+		};		
 	}
 
 	angular.module("ToDo.Controllers")

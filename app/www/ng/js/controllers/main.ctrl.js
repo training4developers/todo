@@ -13,8 +13,8 @@
 		};
 
 		Events.on("refresh-todos", function() {
-			ToDosRepository.getAll().then(function(result) {
-				$scope.todos = result.data;
+			ToDosRepository.getAll().then(function(todos) {
+				$scope.todos = todos;
 			});
 		});
 
