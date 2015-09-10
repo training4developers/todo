@@ -18,7 +18,11 @@
   "dependencies": {
     "angular": "~1.4.5",
     "angular-sanitize": "~1.4.5",
+    "backbone": "~1.2.3",
     "foundation": "~5.5.2",
-    "jquery": "~2.1.4"
+    "handlebars": "~4.0.2",
+    "jquery": "~2.1.4",
+    "knockback": "~1.0.0",
+    "underscore": "~1.8.3"
   }
 }
