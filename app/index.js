@@ -1,5 +1,7 @@
 module.exports = function(config) {
 
+	"use strict";
+
 	global.logger = require("./logger")(config.logger);
 
 	var
@@ -12,25 +14,25 @@ module.exports = function(config) {
 		config.mongoServer.port + "/" +
 		config.mongoServer.dbName);
 
-	app.use("/api", require("body-parser").json());
-	app.use("/api", require("./routers/rest")("todo"));
+	app.use("/api",
+		require("body-parser").json(),
+		require("./routers/rest")("todo"));
 
 	Object.keys(config.httpServer.contentFolders).forEach(function(url) {
-		var folder = config.httpServer.contentFolders[url];
-		global.logger.info("configuring route " + url + " for folder " + folder);
-		app.use(url, express.static(folder));
+		app.use(url, express.static(config.httpServer.contentFolders[url]));
 	});
 
 	app.use("/ng", helpers.defaultFile(config.httpServer.ngIndexFile));
 	app.use("/bb", helpers.defaultFile(config.httpServer.bbIndexFile));
 	app.use("/", helpers.defaultFile(config.httpServer.indexFile));
 
-	require("http").createServer(app).listen(config.httpServer.port, function(err) {
-		if (err) {
-			global.logger.error(err);
-			return;
-		}
-		global.logger.info("http server started on port " + config.httpServer.port);
-	});
+	require("http").createServer(app)
+		.listen(config.httpServer.port, function(err) {
+			if (err) {
+				global.logger.error(err);
+				return;
+			}
+			global.logger.info("http server started on port " + config.httpServer.port);
+		});
 
 }

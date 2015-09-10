@@ -1,5 +1,7 @@
 module.exports = function(fileName) {
 
+	"use strict";
+
 	var
 		mongoose = require("mongoose"),
 		modelName = require("camelcase")(fileName),

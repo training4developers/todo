@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
 
 	defaultFile: function(fileName) {
@@ -13,4 +15,4 @@ module.exports = {
 
 	}
 
-}
+};

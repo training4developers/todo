@@ -1,7 +1,9 @@
 module.exports = function(config) {
 
+	"use strict";
+
 	var
-		winston = require("winston")
+		winston = require("winston"),
 		logger =  new winston.Logger();
 
 	if (config.transports.console) {
