@@ -53,10 +53,16 @@ module.exports = function(grunt) {
 
 	});
 
+	grunt.registerTask("sample-data", function() {
+
+		require("./app/sample-data")(grunt.config(), this.async());
+
+	});
+
 	grunt.registerTask("default", function() {
 
-		require("./app/index")(grunt.config());
 		this.async();
+		require("./app/index")(grunt.config());
 
 	});
 

@@ -3,7 +3,7 @@ module.exports = function(fileName) {
 	"use strict";
 
 	var
-		mongoose = require("mongoose"),
+		//mongoose = require("mongoose"),
 		modelName = require("camelcase")(fileName),
 		pluralize = require('mongoose/lib/utils').toCollectionName,
 		collectionName = 	pluralize(modelName),
