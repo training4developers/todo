@@ -21,7 +21,10 @@
   },
   "dependencies": {
     "body-parser": "^1.13.3",
+    "camelcase": "^1.2.1",
     "express": "^4.13.3",
-    "sqlite3": "^3.0.10"
+    "mongoose": "^4.1.6",
+    "sqlite3": "^3.0.10",
+    "winston": "^1.0.1"
   }
 }

@@ -1,34 +1,62 @@
 module.exports = function(grunt) {
 
+	"use strict";
+
+	var
+		path = require("path"),
+		wwwFolder = path.join("app", "www"),
+		cssFolder = path.join(wwwFolder, "css"),
+		ngJSFolder = path.join(wwwFolder, "ng", "js"),
+		bbJSFolder = path.join(wwwFolder, "bb", "js"),
+		libsFolder = path.join(wwwFolder, "libs"),
+		mediaFolder = path.join(wwwFolder, "media"),
+		imagesFolder = path.join(wwwFolder, "images"),
+		indexFile = path.join(__dirname, wwwFolder, "index.html"),
+		ngIndexFile = path.join(__dirname, wwwFolder, "ng", "index.html"),
+		bbIndexFile = path.join(__dirname, wwwFolder, "bb", "index.html");
+
 	grunt.initConfig({
-		webServer: {
+		httpServer: {
 			port: 8080,
-			rootFolder: "app/www"
+			rootFolder: wwwFolder,
+			indexFile: indexFile,
+			ngIndexFile: ngIndexFile,
+			bbIndexFile: bbIndexFile,
+			contentFolders: {
+				"/css": cssFolder,
+				"/ng/js": ngJSFolder,
+				"/bb/js": bbJSFolder,
+				"/libs": libsFolder,
+				"/media": mediaFolder,
+				"/images": imagesFolder,
+			}
 		},
-		sqlite: {
-			fileName: "todos.db"
-		}
+    mongoServer: {
+      host: "localhost",
+      port: 27017,
+      dbName: "ToDos"
+    },
+    logger: {
+      transports: {
+        console: {
+          level: "debug",
+          colorize: true,
+          timeStamp: true
+        },
+        file: {
+          level: "debug",
+          fileName: path.join(__dirname, "logs", "app.log"),
+          timeStamp : true
+        }
+      }
+    },
+
 	});
 
 	grunt.registerTask("default", function() {
 
-		var
-			express = require("express"),
-			bodyParser = require("body-parser"),
-			app = express(),
-			webServerConfig = grunt.config("webServer");
-
+		require("./app/index")(grunt.config());
 		this.async();
-
-		app.use("/api", bodyParser.json());
-
-		app.use("/api", require("./app/restService")(grunt.config("sqlite")));
-
-		app.use(express.static(webServerConfig.rootFolder));
-
-		require("http").createServer(app).listen(webServerConfig.port, function() {
-			console.log("web server started on port " + webServerConfig.port);
-		});
 
 	});
 

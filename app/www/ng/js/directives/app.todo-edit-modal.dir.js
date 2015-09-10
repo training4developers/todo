@@ -86,12 +86,12 @@
 							$(rootElement).foundation('reveal', 'open');
 
 						});
-					});
+					};
 
 					element.on("click", runModal);
 
 					// remove event handler when scope is being destroyed
-					$scope.$on("$destroy", function() {
+					scope.$on("$destroy", function() {
 						element.off("click", runModel);
 					});
 
