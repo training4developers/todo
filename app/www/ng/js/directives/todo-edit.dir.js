@@ -27,6 +27,12 @@
 
 				scope.modalHeader = scope.todoId ? "Edit ToDo" : "New ToDo";
 
+				scope.priorityList = [
+					{ value:10, caption:"High" },
+					{ value:0, caption:"Normal" },
+					{ value:-10, caption:"Low" },
+				];
+
 				scope.saveToDo = function(todo) {
 					ToDosRepository.save(todo).then(function() {
 						cleanUpModal(rootElement, scope.completed);
@@ -52,11 +58,9 @@
 							return ToDosRepository.get(scope.todoId);
 						} else {
 							return {
-								data: {
-									dueDate: new Date(),
-									priority: 0,
-									completed: false
-								}
+								dueDate: Date.now(),
+								priority: 0,
+								completed: false
 							};
 						}
 					}
@@ -66,19 +70,9 @@
 						$templateRequest(TemplateBaseURL + "todo-edit.html")
 					]).then(function(results) {
 
-						console.log(JSON.stringify(results[0]));
-
 						scope.todo = results[0];
-						if (!(scope.todo.dueDate instanceof Date)) {
-							scope.todo.dueDate = new Date(scope.todo.dueDate);
-						}
+						scope.todo.dueDate = new Date(scope.todo.dueDate);
 						rootElement = $compile(results[1])(scope);
-
-						scope.priorityList = [
-							{ value:10, caption:"High" },
-							{ value:0, caption:"Normal" },
-							{ value:-10, caption:"Low" },
-						];
 
 						$("body").append(rootElement);
 						rootElement.foundation('reveal', 'open');
