@@ -1,3 +1,7 @@
+.ng-cloak {
+	display:none;
+}
+
 body > main {
 	padding-top:20px;
 }
@@ -11,6 +15,10 @@ body > footer {
 	border-radius: 5px;
 	font-weight:bold;
 	margin-bottom:10px;
+}
+
+#todo-list > div:last-child {
+	display:none;
 }
 
 #todo-list > div > div:nth-child(n+2) {

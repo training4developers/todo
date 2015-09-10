@@ -1,8 +1,8 @@
 (function(angular) {
 
-	eventsSvc.$inject = [];
+	factory.$inject = [];
 
-	function eventsSvc() {
+	function factory() {
 
 		var events = [];
 
@@ -24,6 +24,6 @@
 	}
 
 	angular.module("ToDo.Services")
-		.factory("Events", eventsSvc);
+		.factory("Events", factory);
 
 })(angular);

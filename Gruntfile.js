@@ -11,6 +11,7 @@ module.exports = function(grunt) {
 		libsFolder = path.join(wwwFolder, "libs"),
 		mediaFolder = path.join(wwwFolder, "media"),
 		imagesFolder = path.join(wwwFolder, "images"),
+		ngPartialsFolder = path.join(wwwFolder, "ng", "partials"),
 		indexFile = path.join(__dirname, wwwFolder, "index.html"),
 		ngIndexFile = path.join(__dirname, wwwFolder, "ng", "index.html"),
 		bbIndexFile = path.join(__dirname, wwwFolder, "bb", "index.html");
@@ -29,6 +30,7 @@ module.exports = function(grunt) {
 				"/libs": libsFolder,
 				"/media": mediaFolder,
 				"/images": imagesFolder,
+				"/ng/partials": ngPartialsFolder
 			}
 		},
     mongoServer: {
@@ -49,22 +51,16 @@ module.exports = function(grunt) {
           timeStamp : true
         }
       }
-    },
-
+    }
 	});
 
 	grunt.registerTask("sample-data", function() {
-
 		require("./app/sample-data")(grunt.config(), this.async());
-
 	});
 
 	grunt.registerTask("default", function() {
-
 		this.async();
 		require("./app/index")(grunt.config());
-
 	});
-
 
 };

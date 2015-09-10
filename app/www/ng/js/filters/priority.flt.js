@@ -1,11 +1,9 @@
 (function(angular) {
 
-	priorityFlt.$inject = [];
+	filter.$inject = [];
 
-	function priorityFlt() {
-
+	function filter() {
 		return function(value) {
-
 			switch(value) {
 				case 10:
 					return "High";
@@ -14,12 +12,10 @@
 				default:
 					return "Normal";
 			}
-
-		}
-
+		};
 	}
 
 	angular.module("ToDo.Filters")
-		.filter("priorityLabel", priorityFlt);
+		.filter("priorityLabel", filter);
 
 })(angular);

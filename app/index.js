@@ -35,4 +35,4 @@ module.exports = function(config) {
 			global.logger.info("http server started on port " + config.httpServer.port);
 		});
 
-}
+};
