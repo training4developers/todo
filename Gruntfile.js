@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 					}
 				},
 				files: {
-					"app/www/bb/js/templates.hbs.js": ["assets/handlebars-min/**/*.min.hbs"]
+					"app/www/bb/js/app/templates.hbs.js": ["assets/handlebars-min/**/*.min.hbs"]
 				}
 			}
 		},
@@ -105,6 +105,6 @@ module.exports = function(grunt) {
 		require("./app/index")(grunt.config());
 	})
 
-	grunt.registerTask("default", ["htmlmin", "handlebars", "watch"]);
+	grunt.registerTask("default", ["htmlmin", "handlebars", "web-server", "watch"]);
 
 };
