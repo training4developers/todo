@@ -16,7 +16,11 @@ module.exports = function(config) {
 
 	app.use("/api",
 		require("body-parser").json(),
-		require("./routers/rest")("todo"));
+		require("./routers/rest")("todo"),
+		function(req, res) {
+			res.status(500).end();
+		}
+	);
 
 	Object.keys(config.httpServer.contentFolders).forEach(function(url) {
 		app.use(url, express.static(config.httpServer.contentFolders[url]));
