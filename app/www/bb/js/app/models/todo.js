@@ -1,22 +1,24 @@
 (function(define) {
 
-	var dependencies = ["underscore", "backbone", "app/models/base"];
+	"use strict";
 
-	function module(_, Backbone, BaseModel) {
+	var deps = ["app/models/base"];
+
+	function module(BaseModel) {
 
 		return BaseModel.extend({
-
+			idAttribute: "_id",
+			urlRoot: "/api/todos",
 			defaults: {
 				task: undefined,
 				priority: 0,
 				dueDate: new Date(),
 				completed: false
 			}
-
 		});
 
 	}
 
-	define(dependencies, module);
+	define(deps, module);
 
 })(define);

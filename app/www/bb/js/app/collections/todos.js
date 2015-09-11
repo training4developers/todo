@@ -1,15 +1,18 @@
 (function(define) {
 
-	var dependencies = ["underscore", "backbone", "app/collections/base", "app/models/todo"];
+	"use strict";
 
-	function module(_, Backbone, BaseCollection, ToDo) {
+	var deps = ["app/collections/base", "app/models/todo"];
+
+	function module(BaseCollection, ToDo) {
 
 		return BaseCollection.extend({
-			model: ToDo
+			model: ToDo,
+			url: "/api/todos"
 		});
 
 	}
 
-	define(dependencies, module);
+	define(deps, module);
 
 })(define);

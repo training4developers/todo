@@ -1,59 +1,19 @@
 (function(define) {
 
-	define(["underscore", "backbone"], function(_, Backbone) {
+	"use strict";
 
-		return Backbone.Collection.extend({
+	var deps = ["backbone", "common/bb-sync-promise"];
 
-			fetch: function(options) {
+	function module(Backbone, bbSyncPromise) {
 
-				if (!options) options = {};
-
-				var originalSuccess = options.success;
-				var originalError = options.error;
-
-				var that = this;
-
-				var p = new Promise(function(resolve, reject) {
-
-					_.extend(options, {
-						success: function(collection) {
-							resolve(collection);
-						},
-						error: function(collection, xhr) {
-							reject(xhr.responseText);
-						}
-					});
-
-					Backbone.Collection.prototype
-						.fetch.call(that, options);
-				});
-
-				return p.then(function() {
-					if (_.isFunction(originalSuccess)) {
-						originalSuccess.apply(this, $.makeArray(arguments));
-					}
-					return arguments[0];
-				}).catch(function() {
-					if (_.isFunction(originalError)) {
-						originalError.apply(this, $.makeArray(arguments));
-					}
-					return xhr.responseText;
-				});
-
-
-			},
-
-			save: function() {
-
-			},
-
-			destroy: function() {
-				
-			}
-
+		return Backbone.Model.extend({
+			fetch: bbSyncPromise(Backbone.Model.prototype.fetch),
+			save: bbSyncPromise(Backbone.Model.prototype.save),
+			destroy: bbSyncPromise(Backbone.Model.prototype.destroy)
 		});
 
+	}
 
-	});
+	define(deps, module);
 
 })(define);

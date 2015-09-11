@@ -1,5 +1,7 @@
 (function(define) {
 
+	"use strict";
+
 	var deps = [];
 
 	functon module() {
