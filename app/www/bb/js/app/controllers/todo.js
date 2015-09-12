@@ -27,7 +27,6 @@
 				contentRegion = app.rootView.getRegion("content"),
 				modalRegion = app.rootView.getRegion("modal"),
 				todos = new ToDos(),
-				taskNameFilter = undefined,
 				currentTodosFilter = undefined;
 
 			headerRegion.show(new HeaderView({
@@ -36,12 +35,13 @@
 				})
 			}));
 
-			controller.listenTo(headerRegion.currentView, "find-todos-by-task", function(taskFilter) {
-				currentTodosFilter = {
-					task: taskFilter
-				};
-				controller.showToDos({ filter: currentTodosFilter, refresh: false });
-			});
+			controller.listenTo(headerRegion.currentView, "find-todos-by-task",
+				function(taskFilter) {
+					currentTodosFilter = {
+						task: taskFilter
+					};
+					controller.showToDos({ filter: currentTodosFilter, refresh: false });
+				});
 
 			controller.listenTo(headerRegion.currentView, "new-todo", function() {
 				this.showEditTodo();

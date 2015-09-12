@@ -14,7 +14,7 @@
 
 			emptyView: ToDoNoListItems,
 
-			childViewContainer: "#todo-rows",
+			childViewContainer: "[todo-rows]",
 
 			childEvents: {
     		"save-todo": function(e, todo) {

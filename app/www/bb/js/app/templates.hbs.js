@@ -19,7 +19,7 @@ this["handlebars"]["header"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta
 
   return "<nav class=\"top-bar\" data-topbar role=\"navigation\"><ul class=\"title-area\"><li class=\"name\"><h1><a href=\"#\">"
     + this.escapeExpression(((helper = (helper = helpers.siteName || (depth0 != null ? depth0.siteName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"siteName","hash":{},"data":data}) : helper)))
-    + "</a></h1></li></ul><section class=\"top-bar-section\"><ul class=\"right\"><li class=\"has-form\"><input type=\"text\" placeholder=\"Find ToDos\" aria-label=\"Find To Dos\"></li><li class=\"has-form\"><a href=\"#\" class=\"button expand\" id=\"new-todo-action\">New ToDo</a></li></ul></section></nav>";
+    + "</a></h1></li></ul><section class=\"top-bar-section\"><ul class=\"right\"><li class=\"has-form\"><input type=\"text\" placeholder=\"Find ToDos\" aria-label=\"Find To Dos\" data-bind=\"value: filterByTask, valueUpdate: 'keyup'\"></li><li class=\"has-form\"><a href=\"#\" class=\"button expand\" new-todo-action>New ToDo</a></li></ul></section></nav>";
 },"useData":true});
 
 this["handlebars"]["main"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -50,7 +50,7 @@ this["handlebars"]["todo-edit"] = Handlebars.template({"1":function(depth0,helpe
     var stack1;
 
   return ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0._id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "<form><div class=\"row\"><div class=\"large-12 columns\"><textarea type=\"text\" name=\"task\" id=\"task\" placeholder=\"Work on my dreams...\" aria-label=\"To Do\" rows=\"4\" data-bind=\"value: task, valueUpdate: 'blur'\"></textarea></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Due Date <input type=\"text\" name=\"dueDate\" id=\"due-date\" data-bind=\"value: dueDate, valueUpdate: 'blur'\"></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Priority<select id=\"priority\" name=\"priority\" data-bind=\"value: priority\"><option value=\"10\">High</option><option value=\"0\">Normal</option><option value=\"-10\">Low</option></select></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Completed <input type=\"checkbox\" name=\"completed\" id=\"completed\" data-bind=\"checked: completed\"></label></div></div><div class=\"row\"><div class=\"large-12 columns buttons\"><button type=\"button\" save-todo-action>Save</button> <button type=\"button\" cancel-todo-action>Cancel</button> "
+    + "<form><div class=\"row\"><div class=\"large-12 columns\"><textarea type=\"text\" name=\"task\" id=\"task\" placeholder=\"Work on my dreams...\" aria-label=\"To Do\" rows=\"4\" data-bind=\"value: task, valueUpdate: 'blur'\"></textarea></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Due Date <input type=\"text\" name=\"dueDate\" id=\"due-date\" data-bind=\"value: dueDate\"></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Priority<select id=\"priority\" name=\"priority\" data-bind=\"value: priority\"><option value=\"10\">High</option><option value=\"0\">Normal</option><option value=\"-10\">Low</option></select></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Completed <input type=\"checkbox\" name=\"completed\" id=\"completed\" data-bind=\"checked: completed\"></label></div></div><div class=\"row\"><div class=\"large-12 columns buttons\"><button type=\"button\" save-todo-action>Save</button> <button type=\"button\" cancel-todo-action>Cancel</button> "
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0._id : depth0),{"name":"if","hash":{},"fn":this.program(5, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</div></div></form><a class=\"close-reveal-modal\" aria-label=\"Close\">&#215;</a>";
 },"useData":true});
@@ -62,7 +62,7 @@ this["handlebars"]["todo-layout"] = Handlebars.template({"compiler":[6,">= 2.0.0
 this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2=this.escapeExpression;
 
-  return "<div class=\"row\"><div class=\"small-10 medium-6 columns\"><a href=\"#\" id=\"edit-todo-action\">"
+  return "<div class=\"row\"><div class=\"small-10 medium-6 columns\"><a href=\"#\" edit-todo-action>"
     + alias2(((helper = (helper = helpers.task || (depth0 != null ? depth0.task : depth0)) != null ? helper : alias1),(typeof helper === "function" ? helper.call(depth0,{"name":"task","hash":{},"data":data}) : helper)))
     + "</a></div><div class=\"medium-2 columns show-for-medium-up\">"
     + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
@@ -78,7 +78,7 @@ this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.
 },"useData":true});
 
 this["handlebars"]["todo-list"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<div id=\"todo-list\"><div class=\"row\"><div class=\"small-12 medium-6 columns\">Task</div><div class=\"medium-2 columns show-for-medium-up\">Priority</div><div class=\"medium-2 columns show-for-medium-up\">Due Date</div><div class=\"medium-2 columns show-for-medium-up\">Completed</div></div><div id=\"todo-rows\"></div></div>";
+    return "<div id=\"todo-list\"><div class=\"row\"><div class=\"small-12 medium-6 columns\">Task</div><div class=\"medium-2 columns show-for-medium-up\">Priority</div><div class=\"medium-2 columns show-for-medium-up\">Due Date</div><div class=\"medium-2 columns show-for-medium-up\">Completed</div></div><div todo-rows></div></div>";
 },"useData":true});
 
 this["handlebars"]["todo-no-list-items"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {

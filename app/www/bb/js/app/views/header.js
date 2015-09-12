@@ -2,26 +2,34 @@
 
 	"use strict";
 
-	var deps = ["marionette"];
+	var deps = ["marionette", "knockout", "knockback"];
 
-	function module(Marionette) {
+	function module(Marionette, ko, kb) {
 
 		return Marionette.ItemView.extend({
 
 			template: "header",
 
 			events: {
-				"keyup input" : "findToDosByTask",
-				"click #new-todo-action": "newToDo"
+				"click [new-todo-action]": "newToDo"
 			},
 
-			findToDosByTask: function(e) {
+			initialize: function() {
+				var controller = this;
+				this.model.on("change:filterByTask", function(model, value) {
+					controller.trigger("find-todos-by-task", value);
+				});
+			},
 
-				var ignoreKeys = [13,16,17,18,20,27,37,40,41,42,91];
+			onRender: function() {
 
-				if (ignoreKeys.indexOf(e.keyCode) === -1) {
-					this.trigger("find-todos-by-task", e.target.value);
+				function ViewModel(model) {
+					this.filterByTask = kb.observable(model, "filterByTask");
 				}
+
+				this.viewModel = new ViewModel(this.model);
+
+				ko.applyBindings(this.viewModel, this.el);
 			},
 
 			newToDo: function() {

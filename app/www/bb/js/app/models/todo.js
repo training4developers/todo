@@ -14,6 +14,9 @@
 				priority: 0,
 				dueDate: new Date(),
 				completed: false
+			},
+			validate: function() {
+				
 			}
 		});
 

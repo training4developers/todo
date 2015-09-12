@@ -12,7 +12,7 @@
 
 			events: {
 				"change input" : "toggleToDoCompleted",
-				"click #edit-todo-action": "editToDo"
+				"click [edit-todo-action]": "editToDo"
 			},
 
 			toggleToDoCompleted: function(e) {

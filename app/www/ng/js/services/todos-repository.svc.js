@@ -19,7 +19,6 @@
 				return $http.post(ToDosRepositoryURL, todo).then(handleResponse);
 			},
 			update: function(todo) {
-				console.log("update: " + JSON.stringify(todo));
 				return $http.put(ToDosRepositoryURL + "/" + encodeURIComponent(todo.id), todo).then(handleResponse);
 			},
 			save: function(todo) {

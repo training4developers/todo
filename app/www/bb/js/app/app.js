@@ -6,12 +6,15 @@
 		"backbone",
 		"marionette",
 		"handlebars",
+		"knockout",
 		"app/controllers/todo",
 		"app/templates.hbs",
-		"app/views/todo-layout"
+		"app/views/todo-layout",
+		"app/models/todo",
+		"app/collections/todos"
 	];
 
-	function configure(Marionette, Handlebars, Templates) {
+	function configure(Marionette, Handlebars, Templates, ko) {
 
 		Marionette.TemplateCache.prototype.loadTemplate =
 			function(templateId, options){
@@ -58,13 +61,12 @@
 			return new Handlebars.SafeString("<input type='checkbox' " +
 				(value ? "checked" : "") + ">");
 		});
-
 	}
 
-	function module(Backbone, Marionette, Handlebars,
-		ToDoController, Templates, ToDoLayoutView) {
+	function module(Backbone, Marionette, Handlebars, ko,
+		ToDoController, Templates, ToDoLayoutView, ToDo, ToDos) {
 
-		configure(Marionette, Handlebars, Templates);
+		configure(Marionette, Handlebars, Templates, ko);
 
 		var ToDosApp = Marionette.Application.extend({
 
