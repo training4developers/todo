@@ -9,27 +9,38 @@
 		return {
 			request: function(config) {
 
-				if (config.url.startsWith("/api/todos")) {
+				if (config.method !== "GET" && config.url.startsWith("/api/todos")) {
 
 					function transformTodo(todo) {
-						todo._id = todo.id;
+
+						// transform id to underscore id for mongo
+						todo["_id"] = todo.id;
 						delete todo.id;
+
+						// added by ng-repeat for iterating
+						delete todo["$$hashKey"];
 					}
 
-					if (config.data instanceof Array) {
-						config.data.forEach(transformTodo);
-					} else if(config.data instanceof Object) {
-						transformTodo(config.data);
+					// clone the object to destroy the underlying scope model
+					var cloneData = angular.copy(config.data);
+
+					if (cloneData instanceof Array) {
+						cloneData.forEach(transformTodo);
+					} else if(cloneData instanceof Object) {
+						transformTodo(cloneData);
 					}
 
+					// set cleaned up clone data to config data for the request
+					config.data = cloneData;
 				}
 
       	return config;
-				
+
     	},
 			response: function(response) {
 
 				if (response.config.url.startsWith("/api/todos")) {
+
 					function transformTodo(todo) {
 						delete todo.__v;
 						todo.id = todo._id;
@@ -38,9 +49,10 @@
 
 					if (response.data instanceof Array) {
 						response.data.forEach(transformTodo);
-					} else if(response.data instanceof Object) {
+					} else if (response.data instanceof Object) {
 						transformTodo(response.data);
 					}
+
 				}
 
 				return response;

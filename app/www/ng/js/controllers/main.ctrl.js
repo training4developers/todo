@@ -5,7 +5,11 @@
 	function controller($scope, ToDosRepository, Events) {
 
 		$scope.saveToDo = function(todo) {
-			ToDosRepository.update(todo);
+			ToDosRepository.update(todo).then(function() {
+				console.log("todo saved");
+			}, function() {
+				console.log("todo not saved");
+			});
 		};
 
 		$scope.refreshToDos = function() {

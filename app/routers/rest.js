@@ -17,6 +17,7 @@ module.exports = function(fileName) {
 				res.status(500).end();
 				return;
 			}
+			console.log(require("util").inspect(results));
 			res.json(results);
 		}
 	}
@@ -37,7 +38,7 @@ module.exports = function(fileName) {
 			DataModel.findById(req.params.id, handleResult.call(res));
 		})
 		.put(function(req, res) {
-			DataModel.findByIdAndUpdate(req.params.id, req.body, handleResult.call(res));
+			DataModel.findByIdAndUpdate(req.params.id, req.body, { new: true }, handleResult.call(res));
 		})
 		.delete(function(req, res) {
 			DataModel.findByIdAndRemove(req.params.id, handleResult.call(res));

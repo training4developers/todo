@@ -13,19 +13,20 @@
 				return $http.get(ToDosRepositoryURL).then(handleResponse);
 			},
 			get: function(id) {
-				return $http.get(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);;
+				return $http.get(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);
 			},
 			insert: function(todo) {
-				return $http.post(ToDosRepositoryURL, todo).then(handleResponse);;
+				return $http.post(ToDosRepositoryURL, todo).then(handleResponse);
 			},
 			update: function(todo) {
-				return $http.put(ToDosRepositoryURL + "/" + encodeURIComponent(todo.id), todo).then(handleResponse);;
+				console.log("update: " + JSON.stringify(todo));
+				return $http.put(ToDosRepositoryURL + "/" + encodeURIComponent(todo.id), todo).then(handleResponse);
 			},
 			save: function(todo) {
 				return todo.id ? this.update(todo) : this.insert(todo);
 			},
 			delete: function(id) {
-				return $http.delete(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);;
+				return $http.delete(ToDosRepositoryURL + "/" + encodeURIComponent(id)).then(handleResponse);
 			}
 		};
 	}
