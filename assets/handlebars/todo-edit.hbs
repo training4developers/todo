@@ -1,1 +1,41 @@
-{{test}}
+<div id="todoDetails" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">{{modalHeader}}</h2>
+	<form>
+    <div class="row">
+	    <div class="large-12 columns">
+        <textarea type="text" name="task" id="task" placeholder="Work on my dreams..." aria-label="To Do" rows="4" ng-model='todo.task'></textarea>
+	    </div>
+	  </div>
+    <div class="row">
+	    <div class="large-12 columns">
+				<label>Due Date
+      	  <input type="date" name="dueDate" id="due-date" placeholder="9/9/2015" ng-model='todo.dueDate'>
+				</label>
+			</div>
+	  </div>
+    <div class="row">
+	    <div class="large-12 columns">
+				<label>Priority
+      	  <select id="priority" name="priority" ng-model='todo.priority'
+						ng-options="priorityItem.value as priorityItem.caption for priorityItem in priorityList | orderBy:'value'">
+					</select>
+				</label>
+			</div>
+	  </div>
+    <div class="row">
+	    <div class="large-12 columns">
+				<label>Completed
+      	  <input type="checkbox" name="completed" id="completed" ng-model='todo.completed'>
+				</label>
+			</div>
+	  </div>
+    <div class="row">
+	    <div class="large-12 columns buttons">
+				<button type="button" ng-click='saveToDo(todo)'>Save</button>
+				<button type="button" ng-click='cancelToDo(todo)'>Cancel</button>
+				<button type="button" ng-click='deleteToDo(todo)' ng-if="todo.id">Delete</button>
+			</div>
+	  </div>
+	</form>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

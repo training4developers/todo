@@ -7,7 +7,7 @@
 	function module(Marionette) {
 
 		return Marionette.ItemView.extend({
-			template: "header"
+			template: "todo-no-list-items"
 		});
 
 	}

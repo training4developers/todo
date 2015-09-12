@@ -1,10 +1,10 @@
 (function(define) {
 
-	"use strict";	
+	"use strict";
 
-	var deps = ["underscore", "Backbone", "Marionette"];
+	var deps = ["marionette"];
 
-	function module(_, Backbone, Marionette) {
+	function module(Marionette) {
 
 		return Marionette.ItemView.extend({
 			template: "todo-edit"

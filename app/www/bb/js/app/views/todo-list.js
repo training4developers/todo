@@ -2,12 +2,15 @@
 
 	"use strict";
 
-	var deps = ["underscore", "Backbone", "Marionette"];
+	var deps = ["marionette", "app/views/todo-list-item", "app/views/todo-no-list-items"];
 
-	function module(_, Backbone, Marionette) {
+	function module(Marionette, ToDoListItem, ToDoNoListItems) {
 
-		return Marionette.CollectionView.extend({
-			template: "main"
+		return Marionette.CompositeView.extend({
+			template: "todo-list",
+			childView: ToDoListItem,
+			emptyView: ToDoNoListItems,
+			childViewContainer: "div"
 		});
 
 	}

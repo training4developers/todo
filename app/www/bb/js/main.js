@@ -6,7 +6,7 @@ require.config({
 		foundation: "../../libs/foundation/js/foundation",
 		underscore: '../../libs/underscore/underscore',
 		backbone: '../../libs/backbone/backbone',
-		marionette: '../../libs/backbone.marionette/backbone.marionette',
+		marionette: '../../libs/backbone.marionette/lib/backbone.marionette',
 		handlebars:'../../libs/handlebars/handlebars',
 		bluebird:'../../libs/bluebird/js/browser/bluebird'
 	},
