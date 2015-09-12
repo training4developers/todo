@@ -17,11 +17,12 @@ body > footer {
 	margin-bottom:10px;
 }
 
-#todo-list > div:last-child {
+#todo-list > div:last-child > div:last-child > div:last-child {
 	display:none;
 }
 
-#todo-list > div > div:nth-child(n+2) {
+#todo-list > div:first-child > div:nth-child(n+2),
+#todo-list > div > div > div > div:nth-child(n+2) {
 	text-align:center;
 }
 

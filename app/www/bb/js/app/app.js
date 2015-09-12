@@ -3,7 +3,10 @@
 	"use strict";
 
 	var deps = [
+		"backbone",
 		"marionette",
+		"handlebars",
+		"app/controllers/todo",
 		"app/templates.hbs",
 		"app/views/todo-layout",
 		"app/views/header",
@@ -13,7 +16,7 @@
 		"app/views/todo-no-list-items"
 	];
 
-	function configure(Marionette, Templates) {
+	function configure(Marionette, Handlebars, Templates) {
 
 		Marionette.TemplateCache.prototype.loadTemplate =
 			function(templateId, options){
@@ -29,12 +32,31 @@
 			return Marionette.TemplateCache.get(template)(data);
 		};
 
+		Handlebars.registerHelper('priorityLabel', function(priority) {
+  		switch(priority) {
+				case 10:
+					return "High";
+				case 0:
+					return "Normal";
+				case -10:
+					return "Low";
+			}
+		});
+
+		Handlebars.registerHelper("formatDate", function(date) {
+			if (!(date instanceof Date)) {
+				date = new Date(date);
+			}
+			return date.toLocaleDateString()
+		});
+
 	}
 
-	function module(Marionette, Templates, ToDoLayoutView, HeaderView, FooterView,
+	function module(Backbone, Marionette, Handlebars, ToDoController,
+			Templates, ToDoLayoutView, HeaderView, FooterView,
 			ToDoListView, ToDoListItemView, ToDoNoListItemsView) {
 
-		configure(Marionette, Templates);
+		configure(Marionette, Handlebars, Templates);
 
 		var ToDosApp = Marionette.Application.extend({
 
@@ -45,11 +67,21 @@
 				this.on("start", function() {
 					app.rootView = new ToDoLayoutView();
 					app.rootView.render();
-					app.rootView.getRegion("header").show(new HeaderView());
-					app.rootView.getRegion("footer").show(new FooterView());
 
-					//app.accountController = new AccountController(app);
-					//app.accountController.showAccounts();
+					app.rootView.getRegion("header").show(new HeaderView({
+						model: new Backbone.Model({
+							siteName: "ToDos"
+						})
+					}));
+
+					app.rootView.getRegion("footer").show(new FooterView({
+						model: new Backbone.Model({
+							copyrightNotice: "&copy; " + new Date().getFullYear() + " Training 4 Developers, Inc."
+						})
+					}));
+
+					app.todoController = new ToDoController(app);
+					app.todoController.showToDos();
 				});
 			}
 

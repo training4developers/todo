@@ -4,7 +4,7 @@
 
 	var deps = [];
 
-	functon module() {
+	function module() {
 
 		return function() {
 

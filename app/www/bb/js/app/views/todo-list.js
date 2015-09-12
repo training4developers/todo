@@ -10,7 +10,7 @@
 			template: "todo-list",
 			childView: ToDoListItem,
 			emptyView: ToDoNoListItems,
-			childViewContainer: "div"
+			childViewContainer: "#todo-rows"
 		});
 
 	}

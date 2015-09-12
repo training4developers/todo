@@ -53,23 +53,23 @@ this["handlebars"]["todo-layout"] = Handlebars.template({"compiler":[6,">= 2.0.0
 },"useData":true});
 
 this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, alias1=this.lambda, alias2=this.escapeExpression;
+    var helper, alias1=helpers.helperMissing, alias2=this.escapeExpression;
 
   return "<div class=\"row\"><div class=\"small-10 medium-6 columns\"><a href=\"#\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.todo : depth0)) != null ? stack1.task : stack1), depth0))
+    + alias2(((helper = (helper = helpers.task || (depth0 != null ? depth0.task : depth0)) != null ? helper : alias1),(typeof helper === "function" ? helper.call(depth0,{"name":"task","hash":{},"data":data}) : helper)))
     + "</a></div><div class=\"medium-2 columns show-for-medium-up\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.todo : depth0)) != null ? stack1.priority : stack1), depth0))
+    + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
     + "</div><div class=\"medium-2 columns show-for-medium-up\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.todo : depth0)) != null ? stack1.dueDate : stack1), depth0))
+    + alias2((helpers.formatDate || (depth0 && depth0.formatDate) || alias1).call(depth0,(depth0 != null ? depth0.dueDate : depth0),{"name":"formatDate","hash":{},"data":data}))
     + "</div><div class=\"small-2 medium-2 columns\"><input type=\"checkbox\"></div></div><div class=\"row show-for-small-only\"><div class=\"small-6 columns\"><small>Priority: "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.todo : depth0)) != null ? stack1.priority : stack1), depth0))
+    + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
     + "</small></div><div class=\"small-6 columns\"><small>Due Date: "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.todo : depth0)) != null ? stack1.dueDate : stack1), depth0))
+    + alias2((helpers.formatDate || (depth0 && depth0.formatDate) || alias1).call(depth0,(depth0 != null ? depth0.dueDate : depth0),{"name":"formatDate","hash":{},"data":data}))
     + "</small></div></div><div class=\"row\"><div class=\"small-12\"><hr></div></div>";
 },"useData":true});
 
 this["handlebars"]["todo-list"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<div id=\"todo-list\"><div class=\"row\"><div class=\"small-12 medium-6 columns\">Task</div><div class=\"medium-2 columns show-for-medium-up\">Priority</div><div class=\"medium-2 columns show-for-medium-up\">Due Date</div><div class=\"medium-2 columns show-for-medium-up\">Completed</div></div></div>";
+    return "<div id=\"todo-list\"><div class=\"row\"><div class=\"small-12 medium-6 columns\">Task</div><div class=\"medium-2 columns show-for-medium-up\">Priority</div><div class=\"medium-2 columns show-for-medium-up\">Due Date</div><div class=\"medium-2 columns show-for-medium-up\">Completed</div></div><div id=\"todo-rows\"></div></div>";
 },"useData":true});
 
 this["handlebars"]["todo-no-list-items"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
