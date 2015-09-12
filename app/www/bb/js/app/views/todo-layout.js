@@ -12,7 +12,8 @@
 			regions: {
 				header: "header",
 				footer: "footer",
-				content: "main"
+				content: "main",
+				modal: "[modal]",
 			}
 		});
 

@@ -5,12 +5,16 @@
 	var deps = [
 		"underscore",
 		"backbone",
+		"app/models/todo",
 		"app/collections/todos",
 		"app/views/header",
 		"app/views/footer",
-		"app/views/todo-list"];
+		"app/views/todo-list",
+		"app/views/todo-edit"
+	];
 
-	function module(_, Backbone, ToDos, HeaderView, FooterView, ToDoListView) {
+	function module(_, Backbone, ToDo, ToDos, HeaderView, FooterView,
+		ToDoListView, ToDoEditView) {
 
 		return function(app) {
 
@@ -21,8 +25,10 @@
 				headerRegion = app.rootView.getRegion("header"),
 				footerRegion = app.rootView.getRegion("footer"),
 				contentRegion = app.rootView.getRegion("content"),
+				modalRegion = app.rootView.getRegion("modal"),
 				todos = new ToDos(),
-				taskNameFilter = undefined;
+				taskNameFilter = undefined,
+				currentTodosFilter = undefined;
 
 			headerRegion.show(new HeaderView({
 				model: new Backbone.Model({
@@ -31,7 +37,10 @@
 			}));
 
 			controller.listenTo(headerRegion.currentView, "find-todos-by-task", function(taskFilter) {
-				controller.showToDos({ filter: { task: taskFilter }, refresh: false });
+				currentTodosFilter = {
+					task: taskFilter
+				};
+				controller.showToDos({ filter: currentTodosFilter, refresh: false });
 			});
 
 			controller.listenTo(headerRegion.currentView, "new-todo", function() {
@@ -79,7 +88,36 @@
 			};
 
 			this.showEditTodo = function(todo) {
-				console.log("called edit show todo");
+
+				var newToDo = todo ? false : true;
+
+				modalRegion.show(new ToDoEditView({
+					model: todo ? todo : new ToDo()
+				}));
+
+				controller.listenTo(modalRegion.currentView, "save-todo", function(todo) {
+					todo.save().then(function() {
+						modalRegion.empty();
+						if (newToDo) {
+							controller.showToDos();
+						} else {
+							controller.showToDos({ filter: currentTodosFilter, refresh: false });
+						}
+					});
+				});
+
+				controller.listenTo(modalRegion.currentView, "cancel-todo", function() {
+					modalRegion.empty();
+					controller.showToDos({ filter: currentTodosFilter, refresh: false });
+				});
+
+				controller.listenTo(modalRegion.currentView, "delete-todo", function(todo) {
+					todo.destroy().then(function() {
+						modalRegion.empty();
+						controller.showToDos({ filter: currentTodosFilter, refresh: false });
+					});
+				});
+
 			};
 
 		};

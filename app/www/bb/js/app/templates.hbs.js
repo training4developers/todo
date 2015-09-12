@@ -40,16 +40,23 @@ this["handlebars"]["main"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
     + "</small></div></div><div class=\"row\" ng-repeat-end><div class=\"small-12\"><hr></div></div></div>";
 },"useData":true});
 
-this["handlebars"]["todo-edit"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
+this["handlebars"]["todo-edit"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    return "<h2 id=\"modalTitle\">Edit ToDo</h2>";
+},"3":function(depth0,helpers,partials,data) {
+    return "<h2 id=\"modalTitle\">New ToDo</h2>";
+},"5":function(depth0,helpers,partials,data) {
+    return " <button type=\"button\" delete-todo-action>Delete</button> ";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
 
-  return "<div id=\"todoDetails\" class=\"reveal-modal\" data-reveal aria-labelledby=\"modalTitle\" aria-hidden=\"true\" role=\"dialog\"><h2 id=\"modalTitle\">"
-    + this.escapeExpression(((helper = (helper = helpers.modalHeader || (depth0 != null ? depth0.modalHeader : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"modalHeader","hash":{},"data":data}) : helper)))
-    + "</h2><form><div class=\"row\"><div class=\"large-12 columns\"><textarea type=\"text\" name=\"task\" id=\"task\" placeholder=\"Work on my dreams...\" aria-label=\"To Do\" rows=\"4\" ng-model=\"todo.task\"></textarea></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Due Date <input type=\"date\" name=\"dueDate\" id=\"due-date\" placeholder=\"9/9/2015\" ng-model=\"todo.dueDate\"></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Priority<select id=\"priority\" name=\"priority\" ng-model=\"todo.priority\" ng-options=\"priorityItem.value as priorityItem.caption for priorityItem in priorityList | orderBy:'value'\"></select></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Completed <input type=\"checkbox\" name=\"completed\" id=\"completed\" ng-model=\"todo.completed\"></label></div></div><div class=\"row\"><div class=\"large-12 columns buttons\"><button type=\"button\" ng-click=\"saveToDo(todo)\">Save</button> <button type=\"button\" ng-click=\"cancelToDo(todo)\">Cancel</button> <button type=\"button\" ng-click=\"deleteToDo(todo)\" ng-if=\"todo.id\">Delete</button></div></div></form><a class=\"close-reveal-modal\" aria-label=\"Close\">&#215;</a></div>";
+  return ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0._id : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "<form><div class=\"row\"><div class=\"large-12 columns\"><textarea type=\"text\" name=\"task\" id=\"task\" placeholder=\"Work on my dreams...\" aria-label=\"To Do\" rows=\"4\" data-bind=\"value: task, valueUpdate: 'blur'\"></textarea></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Due Date <input type=\"date\" name=\"dueDate\" id=\"due-date\" placeholder=\"9/9/2015\" data-bind=\"value: dueDate, valueUpdate: 'blur'\"></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Priority<select id=\"priority\" name=\"priority\" data-bind=\"value: priority, valueUpdate: 'update'\"><option value=\"10\">High</option><option value=\"0\">Normal</option><option value=\"-10\">Low</option></select></label></div></div><div class=\"row\"><div class=\"large-12 columns\"><label>Completed <input type=\"checkbox\" name=\"completed\" id=\"completed\" ng-model=\"todo.completed\" data-bind=\"value: completed, valueUpdate: 'change'\"></label></div></div><div class=\"row\"><div class=\"large-12 columns buttons\"><button type=\"button\" save-todo-action>Save</button> <button type=\"button\" cancel-todo-action>Cancel</button> "
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0._id : depth0),{"name":"if","hash":{},"fn":this.program(5, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "</div></div></form><a class=\"close-reveal-modal\" aria-label=\"Close\">&#215;</a>";
 },"useData":true});
 
 this["handlebars"]["todo-layout"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<header></header><main></main><footer></footer>";
+    return "<header></header><main></main><footer></footer><div modal></div>";
 },"useData":true});
 
 this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {

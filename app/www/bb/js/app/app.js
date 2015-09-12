@@ -86,6 +86,7 @@
 		});
 
 		$(function() {
+			$(document).foundation();
 			var todosApp = new ToDosApp();
 			todosApp.start();
 		});

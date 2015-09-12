@@ -8,7 +8,9 @@ require.config({
 		backbone: '../../libs/backbone/backbone',
 		marionette: '../../libs/backbone.marionette/lib/backbone.marionette',
 		handlebars:'../../libs/handlebars/handlebars',
-		bluebird:'../../libs/bluebird/js/browser/bluebird'
+		bluebird:'../../libs/bluebird/js/browser/bluebird',
+		knockout:'../../libs/knockout/dist/knockout',
+		knockback:'../../libs/knockback/knockback',
 	},
 
 	shim: {
@@ -19,7 +21,7 @@ require.config({
 			exports: '$'
 		},
 		foundation: {
-			deps: ["jquery"]
+			deps: ["modernizr","jquery"]
 		},
 		underscore: {
 			exports: '_'
@@ -34,9 +36,19 @@ require.config({
 		},
 		handlebars: {
 			exports: "Handlebars"
+		},
+		bluebird: {
+			export: "Promise"
+		},
+		knockout: {
+			exports: "ko"
+		},
+		knockback: {
+			deps: ["knockout"],
+			exports: "kb"
 		}
 	}
 
 });
 
-requirejs(['app/app']);
+requirejs(["foundation", "app/app"]);
