@@ -27,8 +27,8 @@
 			return Marionette.TemplateCache.get(template)(data);
 		};
 
-		Handlebars.registerHelper('priorityLabel', function(priority) {
-  		switch(priority) {
+		Handlebars.registerHelper('priorityLabel', function(value) {
+  		switch(value) {
 				case 10:
 					return "High";
 				case 0:
@@ -38,11 +38,23 @@
 			}
 		});
 
-		Handlebars.registerHelper("formatDate", function(date) {
-			if (!(date instanceof Date)) {
-				date = new Date(date);
+		Handlebars.registerHelper("formatDate", function(value) {
+
+			var date;
+
+			if (!(value instanceof Date)) {
+				date = new Date(value);
+			} else {
+				date = value;
 			}
-			return date.toLocaleDateString()
+
+			return date.toLocaleDateString();
+
+		});
+
+		Handlebars.registerHelper("checkbox", function(value) {
+			return new Handlebars.SafeString("<input type='checkbox' " +
+				(value ? "checked" : "") + ">");
 		});
 
 	}

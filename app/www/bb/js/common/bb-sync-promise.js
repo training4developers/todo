@@ -8,9 +8,19 @@
 
 		return function (syncFn) {
 
-			return function (options) {
+			return function (attributes, options) {
 
-				if (!options) options = {};
+				var args = [];
+
+				if (arguments.length === 2) {
+					args.push(attributes);
+				} else if (arguments.length === 1) {
+					options = attributes;
+				} else {
+					options = {};
+				}
+
+				args.push(options);
 
 				var originalSuccess = options.success;
 				var originalError = options.error;
@@ -28,7 +38,7 @@
 						}
 					});
 
-					syncFn.call(that, options);
+					syncFn.apply(that, args);
 				});
 
 				return p.then(function() {

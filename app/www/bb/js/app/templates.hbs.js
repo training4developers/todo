@@ -61,7 +61,9 @@ this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.
     + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
     + "</div><div class=\"medium-2 columns show-for-medium-up\">"
     + alias2((helpers.formatDate || (depth0 && depth0.formatDate) || alias1).call(depth0,(depth0 != null ? depth0.dueDate : depth0),{"name":"formatDate","hash":{},"data":data}))
-    + "</div><div class=\"small-2 medium-2 columns\"><input type=\"checkbox\"></div></div><div class=\"row show-for-small-only\"><div class=\"small-6 columns\"><small>Priority: "
+    + "</div><div class=\"small-2 medium-2 columns\">"
+    + alias2((helpers.checkbox || (depth0 && depth0.checkbox) || alias1).call(depth0,(depth0 != null ? depth0.completed : depth0),{"name":"checkbox","hash":{},"data":data}))
+    + "</div></div><div class=\"row show-for-small-only\"><div class=\"small-6 columns\"><small>Priority: "
     + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
     + "</small></div><div class=\"small-6 columns\"><small>Due Date: "
     + alias2((helpers.formatDate || (depth0 && depth0.formatDate) || alias1).call(depth0,(depth0 != null ? depth0.dueDate : depth0),{"name":"formatDate","hash":{},"data":data}))

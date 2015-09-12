@@ -51,7 +51,7 @@
 					}));
 
 					controller.listenTo(contentRegion.currentView, "save-todo", function(todo) {
-						console.log("todo ctrl save todo: " + JSON.stringify(todo));
+						todo.save();
 					});
 
 					controller.listenTo(contentRegion.currentView, "edit-todo", function(todo) {
