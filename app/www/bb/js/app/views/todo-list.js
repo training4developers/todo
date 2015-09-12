@@ -17,12 +17,13 @@
 			childViewContainer: "#todo-rows",
 
 			childEvents: {
-    		"save-todo": "saveToDo"
+    		"save-todo": function(e, todo) {
+					this.trigger("save-todo",  todo);
+				},
+				"edit-todo": function(e, todo) {
+					this.trigger("edit-todo",  todo);
+				}
   		},
-
-			saveToDo: function(e, todo) {
-				this.trigger("save-todo",  todo);
-			}
 
 		});
 

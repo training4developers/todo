@@ -33,6 +33,10 @@
 				console.log("todo ctrl taskname: " + taskName);
 			});
 
+			controller.listenTo(headerRegion.currentView, "new-todo", function() {
+				console.log("new todo ctrl");
+			});
+
 			footerRegion.show(new FooterView({
 				model: new Backbone.Model({
 					copyrightNotice: "&copy; " + new Date().getFullYear() + " Training 4 Developers, Inc."
@@ -47,7 +51,11 @@
 					}));
 
 					controller.listenTo(contentRegion.currentView, "save-todo", function(todo) {
-						console.log("todo ctrl todo: " + JSON.stringify(todo));
+						console.log("todo ctrl save todo: " + JSON.stringify(todo));
+					});
+
+					controller.listenTo(contentRegion.currentView, "edit-todo", function(todo) {
+						console.log("todo ctrl edit todo: " + JSON.stringify(todo));
 					});
 
 				});

@@ -11,11 +11,16 @@
 			template: "header",
 
 			events: {
-				"keyup input" : "findToDosByTaskName"
+				"keyup input" : "findToDosByTaskName",
+				"click #new-todo-action": "newToDo"
 			},
 
 			findToDosByTaskName: function(e) {
 				this.trigger("find-todos-by-task-name", e.target.value);
+			},
+
+			newToDo: function() {
+				this.trigger("new-todo");
 			}
 
 		});

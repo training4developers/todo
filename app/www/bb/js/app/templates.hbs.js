@@ -19,7 +19,7 @@ this["handlebars"]["header"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta
 
   return "<nav class=\"top-bar\" data-topbar role=\"navigation\"><ul class=\"title-area\"><li class=\"name\"><h1><a href=\"#\">"
     + this.escapeExpression(((helper = (helper = helpers.siteName || (depth0 != null ? depth0.siteName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"siteName","hash":{},"data":data}) : helper)))
-    + "</a></h1></li></ul><section class=\"top-bar-section\"><ul class=\"right\"><li class=\"has-form\"><input type=\"text\" placeholder=\"Find ToDos\" aria-label=\"Find To Dos\"></li><li class=\"has-form\"><a href=\"#\" class=\"button expand\">New ToDo</a></li></ul></section></nav>";
+    + "</a></h1></li></ul><section class=\"top-bar-section\"><ul class=\"right\"><li class=\"has-form\"><input type=\"text\" placeholder=\"Find ToDos\" aria-label=\"Find To Dos\"></li><li class=\"has-form\"><a href=\"#\" class=\"button expand\" id=\"new-todo-action\">New ToDo</a></li></ul></section></nav>";
 },"useData":true});
 
 this["handlebars"]["main"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -55,7 +55,7 @@ this["handlebars"]["todo-layout"] = Handlebars.template({"compiler":[6,">= 2.0.0
 this["handlebars"]["todo-list-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2=this.escapeExpression;
 
-  return "<div class=\"row\"><div class=\"small-10 medium-6 columns\"><a href=\"#\">"
+  return "<div class=\"row\"><div class=\"small-10 medium-6 columns\"><a href=\"#\" id=\"edit-todo-action\">"
     + alias2(((helper = (helper = helpers.task || (depth0 != null ? depth0.task : depth0)) != null ? helper : alias1),(typeof helper === "function" ? helper.call(depth0,{"name":"task","hash":{},"data":data}) : helper)))
     + "</a></div><div class=\"medium-2 columns show-for-medium-up\">"
     + alias2((helpers.priorityLabel || (depth0 && depth0.priorityLabel) || alias1).call(depth0,(depth0 != null ? depth0.priority : depth0),{"name":"priorityLabel","hash":{},"data":data}))
