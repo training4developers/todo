@@ -11,7 +11,8 @@
 		"app/templates.hbs",
 		"app/views/todo-layout",
 		"app/models/todo",
-		"app/collections/todos"
+		"app/collections/todos",
+		"app/routers/todo-router"
 	];
 
 	function configure(Marionette, Handlebars, Templates, ko) {
@@ -64,7 +65,8 @@
 	}
 
 	function module(Backbone, Marionette, Handlebars, ko,
-		ToDoController, Templates, ToDoLayoutView, ToDo, ToDos) {
+		ToDoController, Templates, ToDoLayoutView,
+		ToDo, ToDos, ToDoRouter) {
 
 		configure(Marionette, Handlebars, Templates, ko);
 
@@ -79,8 +81,7 @@
 					app.rootView = new ToDoLayoutView();
 					app.rootView.render();
 
-					app.todoController = new ToDoController(app);
-					app.todoController.showToDos();
+					app.todoController = new ToDoController(app, new ToDoRouter());
 
 				});
 			}
@@ -91,6 +92,7 @@
 			$(document).foundation();
 			var todosApp = new ToDosApp();
 			todosApp.start();
+			Backbone.history.start();
 		});
 
 	}

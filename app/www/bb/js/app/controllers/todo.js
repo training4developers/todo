@@ -16,7 +16,7 @@
 	function module(_, Backbone, ToDo, ToDos, HeaderView, FooterView,
 		ToDoListView, ToDoEditView) {
 
-		return function(app) {
+		return function(app, router) {
 
 			_.extend(this, Backbone.Events);
 
@@ -29,19 +29,33 @@
 				todos = new ToDos(),
 				currentTodosFilter = undefined;
 
+
+			function filterToDos(taskFilter, refresh) {
+				currentTodosFilter = {
+					task: taskFilter
+				};
+				controller.showToDos({ filter: currentTodosFilter, refresh: refresh });
+			}
+
 			headerRegion.show(new HeaderView({
 				model: new Backbone.Model({
 					siteName: "ToDos"
 				})
 			}));
 
-			controller.listenTo(headerRegion.currentView, "find-todos-by-task",
-				function(taskFilter) {
-					currentTodosFilter = {
-						task: taskFilter
-					};
-					controller.showToDos({ filter: currentTodosFilter, refresh: false });
-				});
+			controller.listenTo(router, "show-todos", function() {
+				this.showToDos();
+			});
+
+			controller.listenTo(router, "find-todos-by-task", function(taskFilter) {
+				filterToDos(taskFilter, true);
+				headerRegion.currentView.trigger("update-find-by-task", taskFilter);
+			});
+
+			controller.listenTo(headerRegion.currentView, "find-todos-by-task", function(taskFilter) {
+				filterToDos(taskFilter, false);
+				router.navigate("find-by-task/" + encodeURIComponent(taskFilter));
+			});
 
 			controller.listenTo(headerRegion.currentView, "new-todo", function() {
 				this.showEditTodo();
@@ -56,6 +70,8 @@
 			this.showToDos = function(options) {
 
 				if (!options) options = {};
+
+				console.dir(options);
 
 				function fillList(collection) {
 
@@ -108,7 +124,6 @@
 
 				controller.listenTo(modalRegion.currentView, "cancel-todo", function() {
 					modalRegion.empty();
-					console.log(JSON.stringify(todos.toJSON()));
 					controller.showToDos({ filter: currentTodosFilter, refresh: false });
 				});
 

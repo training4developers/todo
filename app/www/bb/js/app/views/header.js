@@ -15,10 +15,16 @@
 			},
 
 			initialize: function() {
-				var controller = this;
+
+				var view = this;
 				this.model.on("change:filterByTask", function(model, value) {
-					controller.trigger("find-todos-by-task", value);
+					view.trigger("find-todos-by-task", value);
 				});
+
+				this.on("update-find-by-task", function(taskFilter) {
+					this.model.set("filterByTask", taskFilter);
+				});
+				
 			},
 
 			onRender: function() {
