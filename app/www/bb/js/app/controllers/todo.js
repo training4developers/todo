@@ -35,7 +35,7 @@
 			});
 
 			controller.listenTo(headerRegion.currentView, "new-todo", function() {
-				console.log("new todo ctrl");
+				this.showEditTodo();
 			});
 
 			footerRegion.show(new FooterView({
@@ -65,7 +65,7 @@
 					});
 
 					controller.listenTo(contentRegion.currentView, "edit-todo", function(todo) {
-						console.log("todo ctrl edit todo: " + JSON.stringify(todo));
+						this.showEditTodo(todo);
 					});
 
 				}
@@ -76,6 +76,10 @@
 					todos.fetch().then(fillList);
 				}
 
+			};
+
+			this.showEditTodo = function(todo) {
+				console.log("called edit show todo");
 			};
 
 		};
