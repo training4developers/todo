@@ -17,7 +17,6 @@ module.exports = function(fileName) {
 				res.status(500).end();
 				return;
 			}
-			console.log(require("util").inspect(results));
 			res.json(results);
 		}
 	}

@@ -7,7 +7,17 @@
 	function module(Marionette) {
 
 		return Marionette.ItemView.extend({
-			template: "header"
+
+			template: "header",
+
+			events: {
+				"keyup input" : "findToDosByTaskName"
+			},
+
+			findToDosByTaskName: function(e) {
+				this.trigger("find-todos-by-task-name", e.target.value);
+			}
+
 		});
 
 	}

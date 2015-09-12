@@ -7,10 +7,23 @@
 	function module(Marionette, ToDoListItem, ToDoNoListItems) {
 
 		return Marionette.CompositeView.extend({
+
 			template: "todo-list",
+
 			childView: ToDoListItem,
+
 			emptyView: ToDoNoListItems,
-			childViewContainer: "#todo-rows"
+
+			childViewContainer: "#todo-rows",
+
+			childEvents: {
+    		"save-todo": "saveToDo"
+  		},
+
+			saveToDo: function(e, todo) {
+				this.trigger("save-todo",  todo);
+			}
+
 		});
 
 	}

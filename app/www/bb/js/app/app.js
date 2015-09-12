@@ -9,11 +9,6 @@
 		"app/controllers/todo",
 		"app/templates.hbs",
 		"app/views/todo-layout",
-		"app/views/header",
-		"app/views/footer",
-		"app/views/todo-list",
-		"app/views/todo-list-item",
-		"app/views/todo-no-list-items"
 	];
 
 	function configure(Marionette, Handlebars, Templates) {
@@ -52,9 +47,8 @@
 
 	}
 
-	function module(Backbone, Marionette, Handlebars, ToDoController,
-			Templates, ToDoLayoutView, HeaderView, FooterView,
-			ToDoListView, ToDoListItemView, ToDoNoListItemsView) {
+	function module(Backbone, Marionette, Handlebars,
+		ToDoController, Templates, ToDoLayoutView) {
 
 		configure(Marionette, Handlebars, Templates);
 
@@ -65,23 +59,13 @@
 				var app = this;
 
 				this.on("start", function() {
+
 					app.rootView = new ToDoLayoutView();
 					app.rootView.render();
 
-					app.rootView.getRegion("header").show(new HeaderView({
-						model: new Backbone.Model({
-							siteName: "ToDos"
-						})
-					}));
-
-					app.rootView.getRegion("footer").show(new FooterView({
-						model: new Backbone.Model({
-							copyrightNotice: "&copy; " + new Date().getFullYear() + " Training 4 Developers, Inc."
-						})
-					}));
-
 					app.todoController = new ToDoController(app);
 					app.todoController.showToDos();
+
 				});
 			}
 
