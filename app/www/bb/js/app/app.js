@@ -8,7 +8,7 @@
 		"handlebars",
 		"app/controllers/todo",
 		"app/templates.hbs",
-		"app/views/todo-layout",
+		"app/views/todo-layout"
 	];
 
 	function configure(Marionette, Handlebars, Templates) {
@@ -28,6 +28,7 @@
 		};
 
 		Handlebars.registerHelper('priorityLabel', function(value) {
+
   		switch(value) {
 				case 10:
 					return "High";
@@ -36,6 +37,7 @@
 				case -10:
 					return "Low";
 			}
+
 		});
 
 		Handlebars.registerHelper("formatDate", function(value) {

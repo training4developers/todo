@@ -11,12 +11,17 @@
 			template: "header",
 
 			events: {
-				"keyup input" : "findToDosByTaskName",
+				"keyup input" : "findToDosByTask",
 				"click #new-todo-action": "newToDo"
 			},
 
-			findToDosByTaskName: function(e) {
-				this.trigger("find-todos-by-task-name", e.target.value);
+			findToDosByTask: function(e) {
+
+				var ignoreKeys = [13,16,17,18,20,27,37,40,41,42,91];
+
+				if (ignoreKeys.indexOf(e.keyCode) === -1) {
+					this.trigger("find-todos-by-task", e.target.value);
+				}
 			},
 
 			newToDo: function() {

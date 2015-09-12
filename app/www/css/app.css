@@ -17,7 +17,7 @@ body > footer {
 	margin-bottom:10px;
 }
 
-#todo-list > div:last-child > div:last-child > div:last-child {
+#todo-list > div:last-child > div:last-child > div:last-child:not(:only-child) {
 	display:none;
 }
 
