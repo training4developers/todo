@@ -34,6 +34,14 @@
 				this.$el.attr("aria-hidden", "true");
 				this.$el.attr("role", "dialog");
 
+				var date = this.model.get("dueDate");
+
+				if (!(date instanceof Date)) {
+					date = new Date(date);
+				}
+
+				this.model.set("dueDate", date.toLocaleDateString());
+
 				this.viewModel = new ViewModel(this.model);
 
 				ko.applyBindings(this.viewModel, this.el);
@@ -48,6 +56,7 @@
 			},
 
 			saveToDo: function() {
+				this.model.set("priority", parseInt(this.model.get("priority")));
 				this.trigger("save-todo", this.model);
 			},
 
