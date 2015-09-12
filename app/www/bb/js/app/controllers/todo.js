@@ -108,6 +108,7 @@
 
 				controller.listenTo(modalRegion.currentView, "cancel-todo", function() {
 					modalRegion.empty();
+					console.log(JSON.stringify(todos.toJSON()));
 					controller.showToDos({ filter: currentTodosFilter, refresh: false });
 				});
 

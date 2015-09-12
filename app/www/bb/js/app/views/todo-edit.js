@@ -61,6 +61,7 @@
 			},
 
 			cancelToDo: function() {
+				this.model.attributes.priority = parseInt(this.model.get("priority"));
 				this.trigger("cancel-todo");
 			},
 

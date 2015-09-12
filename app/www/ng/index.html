@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="css/app.css">
 		<script src="libs/foundation/js/vendor/modernizr.js"></script>
 	</head>
-	<body class="ng-cloak"> <!-- $rootScope -->
+	<body class="ng-cloak">
 		<header ng-controller="header">
 			<nav class="top-bar" data-topbar role="navigation">
 			  <ul class="title-area">
@@ -38,21 +38,23 @@
 				  <div class="medium-2 columns show-for-medium-up">Due Date</div>
 				  <div class="medium-2 columns show-for-medium-up">Completed</div>
 				</div>
-				<div class="row" ng-repeat-start="todo in todos | filter:{task:findToDosByTask}">
-				  <div class="small-10 medium-6 columns">
-						<a href='#' todo-edit="{{todo.id}}" todo-edit-complete="refreshToDos()">{{todo.task}}</a>
+				<div todo-rows><div>
+					<div class="row" ng-repeat-start="todo in todos | filter:{task:findToDosByTask}">
+					  <div class="small-10 medium-6 columns">
+							<a href='#' todo-edit="{{todo.id}}" todo-edit-complete="refreshToDos()">{{todo.task}}</a>
+						</div>
+					  <div class="medium-2 columns show-for-medium-up">{{todo.priority | priorityLabel}}</div>
+					  <div class="medium-2 columns show-for-medium-up">{{todo.dueDate | date:'MM/dd/yyyy'}}</div>
+					  <div class="small-2 medium-2 columns"><input type="checkbox" ng-model="todo.completed" ng-change='saveToDo(todo)'></div>
 					</div>
-				  <div class="medium-2 columns show-for-medium-up">{{todo.priority | priorityLabel}}</div>
-				  <div class="medium-2 columns show-for-medium-up">{{todo.dueDate | date:'MM/dd/yyyy'}}</div>
-				  <div class="small-2 medium-2 columns"><input type="checkbox" ng-model="todo.completed" ng-change='saveToDo(todo)'></div>
-				</div>
-				<div class="row show-for-small-only">
-				  <div class="small-6 columns"><small>Priority: {{todo.priority | priorityLabel}}</small></div>
-				  <div class="small-6 columns"><small>Due Date: {{todo.dueDate | date:'MM/dd/yyyy'}}</small></div>
-				</div>
-				<div class="row" ng-repeat-end>
-					<div class="small-12"><hr></div>
-				</div>
+					<div class="row show-for-small-only">
+					  <div class="small-6 columns"><small>Priority: {{todo.priority | priorityLabel}}</small></div>
+					  <div class="small-6 columns"><small>Due Date: {{todo.dueDate | date:'MM/dd/yyyy'}}</small></div>
+					</div>
+					<div class="row" ng-repeat-end>
+						<div class="small-12"><hr></div>
+					</div>
+				</div></div>
 			</div>
 		</main>
 		<footer ng-controller="footer">
